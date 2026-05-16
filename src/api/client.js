@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({ 
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api' 
+  baseURL: 'https://tdtlworld.com/rekyc-backend/api' 
 });
 
 API.interceptors.request.use(config => {
@@ -22,7 +22,7 @@ API.interceptors.response.use(
 );
 
 export const AI = axios.create({ 
-  baseURL: import.meta.env.VITE_AI_URL || 'http://localhost:8010' 
+  baseURL: 'https://tdtlworld.com/rekyc-backend/ai' 
 });
 
 export default API;

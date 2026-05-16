@@ -2,90 +2,86 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/UI';
 
+const Highlight = ({ children }) => (
+  <span style={{ 
+    background: '#dcfce7', 
+    color: '#166534', 
+    padding: '0 8px', 
+    borderRadius: '8px', 
+    display: 'inline-block',
+    margin: '0 4px'
+  }}>
+    {children}
+  </span>
+);
+
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff', color: '#1e293b', fontFamily: '"Outfit", sans-serif' }}>
-      {/* Premium Navbar */}
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 80px', borderBottom: '1px solid #f1f5f9' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ background: '#ef4444', width: '32px', height: '32px', borderRadius: '8px', display: 'grid', placeItems: 'center' }}>🛡️</div>
-          <b style={{ fontSize: '20px', letterSpacing: '-0.5px' }}>KYC Shield</b>
+      {/* SaaS Style Navbar */}
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 60px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ color: '#10b981', fontSize: '24px' }}>🛡️</div>
+          <div>
+            <b style={{ fontSize: '20px', fontWeight: '800', color: '#064e3b' }}>KYC WIDGET</b>
+            <div style={{ fontSize: '10px', color: '#64748b', fontWeight: 'bold' }}>KYC Anti-fraud for your business</div>
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: '40px', alignItems: 'center', fontSize: '15px', fontWeight: '600' }}>
-          <span style={{ cursor: 'pointer' }}>Products</span>
-          <span style={{ cursor: 'pointer' }}>Enterprise</span>
-          <span style={{ cursor: 'pointer' }}>Security</span>
-          <Button style={{ background: '#1e293b', borderRadius: '12px', padding: '10px 24px' }} onClick={() => navigate('/login')}>Bank Login</Button>
+        
+        <div style={{ display: 'flex', gap: '30px', alignItems: 'center', color: '#64748b', fontWeight: '500', fontSize: '14px' }}>
+          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>🏷️ Pricing</span>
+          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>🧩 The widget</span>
+          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>ℹ️ Our company</span>
+          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>💬 Chat with us</span>
+        </div>
+
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <Button 
+            style={{ background: '#10b981', borderRadius: '100px', padding: '10px 24px', fontWeight: '700', border: 'none' }}
+            onClick={() => navigate('/login')}
+          >
+            🔐 Create an account
+          </Button>
+          <span style={{ color: '#10b981', fontWeight: '700', cursor: 'pointer' }} onClick={() => navigate('/login')}>Login →</span>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <div style={{ position: 'relative', overflow: 'hidden', padding: '100px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '60px' }}>
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'inline-block', background: '#ecfdf5', color: '#059669', padding: '6px 16px', borderRadius: '100px', fontSize: '13px', fontWeight: 'bold', marginBottom: '24px' }}>
-            ✨ AI-POWERED ONBOARDING v2.0
-          </div>
-          <h1 style={{ fontSize: '72px', lineHeight: '1.1', fontWeight: '900', color: '#1e293b', marginBottom: '30px' }}>
-            Complete your KYC in <span style={{ color: '#2563eb' }}>under 5 minutes</span>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', padding: '60px', alignItems: 'center', gap: '40px' }}>
+        <div style={{ paddingRight: '40px' }}>
+          <h1 style={{ fontSize: '64px', fontWeight: '800', lineHeight: '1.1', color: '#064e3b', marginBottom: '30px' }}>
+            Protect your <Highlight>SAAS</Highlight> from <Highlight>fake users</Highlight> with our <Highlight>smart KYC</Highlight>
           </h1>
-          <p style={{ fontSize: '20px', lineHeight: '1.6', color: '#64748b', marginBottom: '40px', maxWidth: '540px' }}>
-            Experience the next generation of banking. Our agentic AI automates identity extraction and risk scoring, getting you verified in real-time.
+          <p style={{ fontSize: '18px', color: '#64748b', marginBottom: '40px', lineHeight: '1.6' }}>
+            Automatically detect and prevent fraud with our AI-powered identity verification widget. Stop <b>fake accounts</b> and protect your revenue with intelligent triggers.
           </p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Button style={{ background: '#2563eb', padding: '16px 40px', borderRadius: '16px', fontSize: '16px', fontWeight: '800', boxShadow: '0 20px 40px -10px rgba(37, 99, 235, 0.3)' }} onClick={() => navigate('/login')}>Apply for Home Loan</Button>
-            <Button variant="secondary" style={{ padding: '16px 40px', borderRadius: '16px', fontSize: '16px', border: '2px solid #f1f5f9' }}>Track My Status</Button>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <Button 
+              style={{ background: '#10b981', padding: '18px 36px', borderRadius: '12px', fontSize: '16px', fontWeight: '800', border: 'none', boxShadow: '0 10px 25px rgba(16, 185, 129, 0.2)' }}
+              onClick={() => navigate('/login')}
+            >
+              ✅ Start protecting now
+            </Button>
+            <span style={{ color: '#10b981', fontWeight: '700', cursor: 'pointer', borderBottom: '1px solid #10b981' }}>View our pricing →</span>
           </div>
+          
+          <div style={{ marginTop: '30px', color: '#94a3b8', fontSize: '14px' }}>No credit card required.</div>
         </div>
 
-        <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(255,255,255,0) 70%)', zIndex: 1 }}></div>
+        {/* Right Side Illustration */}
+        <div style={{ background: '#f0fff4', borderRadius: '40px', height: '600px', display: 'grid', placeItems: 'center', position: 'relative', overflow: 'hidden' }}>
           <img 
-            src="/kyc_hero_visual_1778836324104.png" 
-            alt="Hero" 
-            style={{ width: '100%', borderRadius: '40px', boxShadow: '0 40px 100px -20px rgba(0,0,0,0.15)', position: 'relative', zIndex: 2 }} 
+            src="/kyc_saas_illustration_1778906699386.png" 
+            alt="SaaS Illustration" 
+            style={{ width: '80%', zIndex: 2 }} 
           />
-        </div>
-      </div>
-
-      {/* Trust & Certification Section */}
-      <div style={{ padding: '60px 80px', background: '#f8fafc', textAlign: 'center' }}>
-        <div style={{ fontSize: '13px', fontWeight: 'bold', color: '#94a3b8', letterSpacing: '0.1em', marginBottom: '40px' }}>CERTIFIED BY WORLD-CLASS REGULATORS</div>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '80px', alignItems: 'center', opacity: 0.7 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', background: '#fff', borderRadius: '50%', display: 'grid', placeItems: 'center', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>🏦</div>
-            <b style={{ fontSize: '18px' }}>RBI</b>
+          {/* Floating Avatar Elements */}
+          <div style={{ position: 'absolute', bottom: '40px', left: '40px', background: 'white', padding: '10px 20px', borderRadius: '100px', boxShadow: '0 10px 20px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', fontWeight: 'bold' }}>
+             <span style={{ color: '#10b981' }}>👤</span> Customers register to your platform
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', background: '#fff', borderRadius: '50%', display: 'grid', placeItems: 'center', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>🏢</div>
-            <b style={{ fontSize: '18px' }}>NHB</b>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', background: '#fff', borderRadius: '50%', display: 'grid', placeItems: 'center', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>⚖️</div>
-            <b style={{ fontSize: '18px' }}>PMLA</b>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', background: '#fff', borderRadius: '50%', display: 'grid', placeItems: 'center', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>🔄</div>
-            <b style={{ fontSize: '18px' }}>CKYC</b>
-          </div>
-        </div>
-      </div>
-
-      {/* Feature Section */}
-      <div style={{ padding: '120px 80px' }}>
-        <div className="grid three" style={{ gap: '40px' }}>
-          {[
-            { title: 'AI OCR Extraction', desc: 'Auto-extract identity details from Aadhaar & PAN with 99.8% precision.', icon: '⚡' },
-            { title: 'Liveness Detection', desc: 'Real-time face matching and liveness checks to prevent spoofing.', icon: '👤' },
-            { title: 'AML Risk Scoring', desc: 'Instant background checks against global sanctions and PEP lists.', icon: '🛡️' }
-          ].map((f, i) => (
-            <div key={i} style={{ padding: '40px', borderRadius: '32px', background: '#fff', border: '1px solid #f1f5f9', transition: 'transform 0.3s' }} className="hover-scale">
-              <div style={{ fontSize: '40px', marginBottom: '24px' }}>{f.icon}</div>
-              <h3 style={{ marginBottom: '16px' }}>{f.title}</h3>
-              <p style={{ color: '#64748b', lineHeight: '1.6' }}>{f.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </div>

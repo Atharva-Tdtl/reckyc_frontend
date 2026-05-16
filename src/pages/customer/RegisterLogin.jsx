@@ -35,10 +35,9 @@ export default function RegisterLogin() {
       const code = Math.floor(100000 + Math.random() * 900000).toString();
       setGeneratedOtp(code);
       setShowOtp(true);
-      // Simulate sending to backend for external delivery
       API.post('/accounts/send-otp/', { email: formData.email, otp: code })
         .then(() => {
-          setToast({ message: `Verification code sent to ${formData.email}. Please check your inbox.`, type: 'success' });
+          setToast({ message: `Verification code sent to ${formData.email}.`, type: 'success' });
         })
         .catch((err) => {
           console.error("Email delivery failed:", err);
@@ -48,22 +47,19 @@ export default function RegisterLogin() {
     }
     
     if (enteredOtp !== generatedOtp) {
-      setToast({ message: 'Invalid OTP. Please check the code shown in the notification.', type: 'danger' });
+      setToast({ message: 'Invalid OTP.', type: 'danger' });
       return;
     }
 
     try {
-      // Create account
       await API.post('/accounts/', { 
-        username: formData.email.split('@')[0], // Use email prefix as username for demo
+        username: formData.email.split('@')[0],
         password: formData.password,
         email: formData.email,
         fullName: formData.fullName
       });
-      
-      // Auto-login
       await login(formData.email.split('@')[0], formData.password);
-      setToast({ message: 'Account created! Starting onboarding...', type: 'success' });
+      setToast({ message: 'Account created!', type: 'success' });
       setTimeout(() => navigate('/app/onboarding'), 1500);
     } catch(err) {
       setToast({ message: 'Registration failed', type: 'danger' });
@@ -71,108 +67,105 @@ export default function RegisterLogin() {
   };
 
   return (
-    <div style={{ 
-      display: 'grid', placeItems: 'center', minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%)',
-      padding: '20px'
-    }}>
-      <Card style={{ 
-        width: '100%', maxWidth: '480px', padding: '48px', 
-        borderRadius: '32px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
-        border: '0'
+    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', minHeight: '100vh', background: '#ffffff' }}>
+      {/* Brand Side */}
+      <div style={{ 
+        background: '#020617', 
+        padding: '80px', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🛡️</div>
-          <h2 style={{ fontSize: '28px', color: '#0f172a', marginBottom: '8px' }}>KYC Shield</h2>
-          <p className="muted" style={{ fontSize: '15px' }}>Secure Onboarding Portal</p>
+        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(2,6,23,0) 70%)' }}></div>
+        
+        <div style={{ zIndex: 2 }}>
+          <div style={{ background: '#ef4444', width: '50px', height: '50px', borderRadius: '14px', display: 'grid', placeItems: 'center', marginBottom: '40px', boxShadow: '0 0 30px rgba(239,68,68,0.4)' }}>
+            <span style={{ fontSize: '32px' }}>🛡️</span>
+          </div>
+          <h1 style={{ fontSize: '48px', fontWeight: '900', color: 'white', marginBottom: '24px', letterSpacing: '-1px' }}>
+            Enterprise <br/><span style={{ color: '#3b82f6' }}>Identity Portal.</span>
+          </h1>
+          <p style={{ fontSize: '18px', color: '#94a3b8', lineHeight: '1.6', maxWidth: '400px' }}>
+            Experience the future of secure onboarding with AI-powered verification and real-time risk intelligence.
+          </p>
         </div>
 
-        <div style={{ 
-          display: 'flex', gap: '8px', padding: '6px', 
-          background: '#f1f5f9', borderRadius: '16px', marginBottom: '32px' 
-        }}>
-          {['login', 'register'].map(t => (
-            <button 
-              key={t}
-              onClick={() => setTab(t)}
-              style={{ 
-                flex: 1, padding: '10px', borderRadius: '12px', border: 0, 
-                fontSize: '14px', fontWeight: '700', cursor: 'pointer',
-                background: tab === t ? 'white' : 'transparent',
-                color: tab === t ? 'var(--primary)' : 'var(--muted)',
-                boxShadow: tab === t ? '0 4px 6px -1px rgba(0,0,0,0.05)' : 'none',
-                textTransform: 'capitalize'
-              }}
-            >
-              {t}
-            </button>
-          ))}
+        <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '40px', color: '#475569', fontSize: '13px' }}>
+           © 2026 KYC Shield Enterprise. Certified by RBI & NHB.
         </div>
+      </div>
 
-        {tab === 'login' ? (
-          <form onSubmit={handleLogin} className="grid" style={{ gap: '20px' }}>
-            <div className="role-switcher">
-              <label>Username</label>
-              <input 
-                type="text" required 
-                value={formData.username} 
-                onChange={e => setFormData({...formData, username: e.target.value})}
-                placeholder="e.g. admin or customer_user"
-              />
-            </div>
-            <div className="role-switcher">
-              <label>Password</label>
-              <input 
-                type="password" required 
-                value={formData.password} 
-                onChange={e => setFormData({...formData, password: e.target.value})}
-                placeholder="••••••••"
-              />
-            </div>
-            <Button type="submit" style={{ marginTop: '12px', width: '100%', padding: '16px' }}>Sign In</Button>
-            <div style={{ textAlign: 'center', marginTop: '12px' }}>
-              <a href="#" className="muted" style={{ fontSize: '14px', fontWeight: '500' }} onClick={(e) => { e.preventDefault(); setToast({ message: 'Reset link sent', type: 'info' }); }}>Forgot password?</a>
-            </div>
-          </form>
-        ) : (
-          <form onSubmit={handleRegister} className="grid" style={{ gap: '20px' }}>
-            {!showOtp ? (
-              <>
-                <div className="role-switcher">
-                  <label>Full Name</label>
-                  <input type="text" required placeholder="John Doe" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} />
-                </div>
-                <div className="role-switcher">
-                  <label>Email Address</label>
-                  <input type="email" required placeholder="john@example.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
-                </div>
-                <Button type="submit" style={{ width: '100%', padding: '16px' }}>Get OTP on Email</Button>
-              </>
-            ) : (
-              <>
-                <div className="role-switcher">
-                  <label>Verification Code (Sent to {formData.email})</label>
-                  <input 
-                    type="text" maxLength="6" required autoFocus 
-                    value={enteredOtp}
-                    onChange={e => setEnteredOtp(e.target.value)}
-                    placeholder="000000" 
-                    style={{ letterSpacing: '8px', textAlign: 'center', fontSize: '20px', fontWeight: '800' }} 
-                  />
-                </div>
-                <div className="role-switcher">
-                  <label>Set Password</label>
-                  <input type="password" required value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} placeholder="••••••••" />
-                </div>
-                <Button type="submit" style={{ width: '100%', padding: '16px' }}>Register & Continue</Button>
-                <div style={{ textAlign: 'center' }}>
-                  <button className="linkbtn" style={{ background: 'transparent', fontSize: '13px' }} onClick={() => setShowOtp(false)}>Back to Email</button>
-                </div>
-              </>
-            )}
-          </form>
-        )}
-      </Card>
+      {/* Form Side */}
+      <div style={{ display: 'grid', placeItems: 'center', padding: '40px' }}>
+        <div style={{ width: '100%', maxWidth: '400px' }}>
+          <div style={{ marginBottom: '40px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#1e293b' }}>
+              {tab === 'login' ? 'Sign In' : 'Create Account'}
+            </h2>
+            <p style={{ color: '#64748b', fontSize: '14px', marginTop: '8px' }}>
+              {tab === 'login' ? 'Enter your credentials to access the terminal' : 'Join the enterprise onboarding network'}
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '8px', padding: '6px', background: '#f1f5f9', borderRadius: '16px', marginBottom: '40px' }}>
+            {['login', 'register'].map(t => (
+              <button key={t} onClick={() => setTab(t)} style={{ 
+                  flex: 1, padding: '12px', borderRadius: '12px', border: 0, fontSize: '14px', fontWeight: '800', cursor: 'pointer',
+                  background: tab === t ? 'white' : 'transparent', color: tab === t ? '#2563eb' : '#64748b',
+                  boxShadow: tab === t ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', textTransform: 'capitalize'
+              }}>{t}</button>
+            ))}
+          </div>
+
+          {tab === 'login' ? (
+            <form onSubmit={handleLogin} style={{ display: 'grid', gap: '24px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>User ID</label>
+                <input 
+                  type="text" required value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})}
+                  placeholder="e.g. admin" style={{ width: '100%', padding: '16px', borderRadius: '16px', border: '1px solid #e2e8f0', fontSize: '15px' }}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Password</label>
+                <input 
+                  type="password" required value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})}
+                  placeholder="••••••••" style={{ width: '100%', padding: '16px', borderRadius: '16px', border: '1px solid #e2e8f0', fontSize: '15px' }}
+                />
+              </div>
+              <Button type="submit" style={{ width: '100%', padding: '18px', borderRadius: '16px', background: '#1e293b', fontSize: '16px', fontWeight: '800' }}>
+                Access Terminal
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handleRegister} style={{ display: 'grid', gap: '24px' }}>
+              {!showOtp ? (
+                <>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Full Name</label>
+                    <input type="text" required placeholder="John Doe" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} style={{ width: '100%', padding: '16px', borderRadius: '16px', border: '1px solid #e2e8f0' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', marginBottom: '10px' }}>Email</label>
+                    <input type="email" required placeholder="john@tdtl.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} style={{ width: '100%', padding: '16px', borderRadius: '16px', border: '1px solid #e2e8f0' }} />
+                  </div>
+                  <Button type="submit" style={{ width: '100%', padding: '18px', borderRadius: '16px', background: '#2563eb' }}>Verify via Email</Button>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', textAlign: 'center', marginBottom: '20px' }}>Verification Code</label>
+                    <input type="text" maxLength="6" required autoFocus value={enteredOtp} onChange={e => setEnteredOtp(e.target.value)} placeholder="000000" style={{ width: '100%', textAlign: 'center', fontSize: '32px', fontWeight: '900', letterSpacing: '12px', border: 'none', background: '#f8fafc', padding: '20px', borderRadius: '16px' }} />
+                  </div>
+                  <Button type="submit" style={{ width: '100%', padding: '18px', borderRadius: '16px', background: '#1e293b' }}>Register</Button>
+                </>
+              )}
+            </form>
+          )}
+        </div>
+      </div>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );

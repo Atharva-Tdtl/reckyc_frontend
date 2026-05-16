@@ -2,86 +2,108 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/UI';
 
-const Highlight = ({ children }) => (
-  <span style={{ 
-    background: '#dcfce7', 
-    color: '#166534', 
-    padding: '0 8px', 
-    borderRadius: '8px', 
-    display: 'inline-block',
-    margin: '0 4px'
-  }}>
-    {children}
-  </span>
-);
-
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', color: '#1e293b', fontFamily: '"Outfit", sans-serif' }}>
-      {/* SaaS Style Navbar */}
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ color: '#10b981', fontSize: '24px' }}>🛡️</div>
+    <div style={{ minHeight: '100vh', background: '#020617', color: '#f8fafc', fontFamily: '"Outfit", sans-serif' }}>
+      {/* Enterprise Sticky Navbar */}
+      <nav style={{ 
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+        padding: '20px 80px', position: 'sticky', top: 0, zIndex: 100,
+        background: 'rgba(2, 6, 23, 0.8)', backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ background: 'linear-gradient(135deg, #ef4444, #991b1b)', width: '36px', height: '36px', borderRadius: '10px', display: 'grid', placeItems: 'center', boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)' }}>🛡️</div>
           <div>
-            <b style={{ fontSize: '20px', fontWeight: '800', color: '#064e3b' }}>KYC WIDGET</b>
-            <div style={{ fontSize: '10px', color: '#64748b', fontWeight: 'bold' }}>KYC Anti-fraud for your business</div>
+            <b style={{ fontSize: '22px', letterSpacing: '-0.5px' }}>KYC Shield</b>
+            <div style={{ fontSize: '10px', opacity: 0.5, fontWeight: '700', letterSpacing: '0.1em' }}>ENTERPRISE SOLUTION</div>
           </div>
         </div>
         
-        <div style={{ display: 'flex', gap: '30px', alignItems: 'center', color: '#64748b', fontWeight: '500', fontSize: '14px' }}>
-          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>🏷️ Pricing</span>
-          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>🧩 The widget</span>
-          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>ℹ️ Our company</span>
-          <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>💬 Chat with us</span>
-        </div>
-
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '40px', alignItems: 'center', fontSize: '14px', fontWeight: '600', color: '#94a3b8' }}>
+          <span style={{ cursor: 'pointer', color: '#f8fafc' }}>Platform</span>
+          <span style={{ cursor: 'pointer' }}>Solutions</span>
+          <span style={{ cursor: 'pointer' }}>Compliance</span>
+          <span style={{ cursor: 'pointer' }}>Security</span>
           <Button 
-            style={{ background: '#10b981', borderRadius: '100px', padding: '10px 24px', fontWeight: '700', border: 'none' }}
+            style={{ background: '#2563eb', borderRadius: '12px', padding: '12px 28px', border: 'none', fontWeight: '800', boxShadow: '0 10px 25px rgba(37, 99, 235, 0.2)' }} 
             onClick={() => navigate('/login')}
           >
-            🔐 Create an account
+            System Access
           </Button>
-          <span style={{ color: '#10b981', fontWeight: '700', cursor: 'pointer' }} onClick={() => navigate('/login')}>Login →</span>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', padding: '60px', alignItems: 'center', gap: '40px' }}>
-        <div style={{ paddingRight: '40px' }}>
-          <h1 style={{ fontSize: '64px', fontWeight: '800', lineHeight: '1.1', color: '#064e3b', marginBottom: '30px' }}>
-            Protect your <Highlight>SAAS</Highlight> from <Highlight>fake users</Highlight> with our <Highlight>smart KYC</Highlight>
+      <div style={{ padding: '100px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '80px', position: 'relative' }}>
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(37, 99, 235, 0.1)', color: '#60a5fa', padding: '8px 16px', borderRadius: '100px', fontSize: '12px', fontWeight: 'bold', border: '1px solid rgba(37, 99, 235, 0.2)', marginBottom: '30px' }}>
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', background: '#60a5fa', borderRadius: '50%' }}></span>
+            AGENTIC AI POWERED ONBOARDING
+          </div>
+          <h1 style={{ fontSize: '72px', lineHeight: '1.05', fontWeight: '900', marginBottom: '30px', background: 'linear-gradient(to bottom, #ffffff 50%, #94a3b8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            Transforming KYC into <br/><span style={{ color: '#2563eb', WebkitTextFillColor: '#2563eb' }}>Digital Intelligence.</span>
           </h1>
-          <p style={{ fontSize: '18px', color: '#64748b', marginBottom: '40px', lineHeight: '1.6' }}>
-            Automatically detect and prevent fraud with our AI-powered identity verification widget. Stop <b>fake accounts</b> and protect your revenue with intelligent triggers.
+          <p style={{ fontSize: '20px', lineHeight: '1.6', color: '#94a3b8', marginBottom: '45px', maxWidth: '580px' }}>
+            Experience the future of onboarding with Agentic AI. We automate identity verification, liveness checks, and risk scoring for modern global finance.
           </p>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <div style={{ display: 'flex', gap: '20px' }}>
             <Button 
-              style={{ background: '#10b981', padding: '18px 36px', borderRadius: '12px', fontSize: '16px', fontWeight: '800', border: 'none', boxShadow: '0 10px 25px rgba(16, 185, 129, 0.2)' }}
+              style={{ background: '#2563eb', padding: '20px 45px', borderRadius: '16px', fontSize: '16px', fontWeight: '800', border: 'none' }} 
               onClick={() => navigate('/login')}
             >
-              ✅ Start protecting now
+              Get Started Now
             </Button>
-            <span style={{ color: '#10b981', fontWeight: '700', cursor: 'pointer', borderBottom: '1px solid #10b981' }}>View our pricing →</span>
+            <Button variant="secondary" style={{ padding: '20px 45px', borderRadius: '16px', fontSize: '16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff' }}>
+              Watch Demo
+            </Button>
           </div>
-          
-          <div style={{ marginTop: '30px', color: '#94a3b8', fontSize: '14px' }}>No credit card required.</div>
         </div>
 
-        {/* Right Side Illustration */}
-        <div style={{ background: '#f0fff4', borderRadius: '40px', height: '600px', display: 'grid', placeItems: 'center', position: 'relative', overflow: 'hidden' }}>
-          <img 
-            src="/kyc_saas_illustration_1778906699386.png" 
-            alt="SaaS Illustration" 
-            style={{ width: '80%', zIndex: 2 }} 
-          />
-          {/* Floating Avatar Elements */}
-          <div style={{ position: 'absolute', bottom: '40px', left: '40px', background: 'white', padding: '10px 20px', borderRadius: '100px', boxShadow: '0 10px 20px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', fontWeight: 'bold' }}>
-             <span style={{ color: '#10b981' }}>👤</span> Customers register to your platform
-          </div>
+        <div style={{ position: 'relative' }}>
+           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(2, 6, 23, 0) 70%)', zIndex: 1 }}></div>
+           <img 
+            src="/kyc_enterprise_hero_1778906958982.png" 
+            alt="Enterprise Visual" 
+            style={{ width: '100%', borderRadius: '40px', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', position: 'relative', zIndex: 2, border: '1px solid rgba(255,255,255,0.1)' }} 
+           />
+        </div>
+      </div>
+
+      {/* Regulatory Trust Bar */}
+      <div style={{ padding: '60px 80px', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <span style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.2em', color: '#475569' }}>REGULATORY COMPLIANCE STANDARDS</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '100px', opacity: 0.8 }}>
+          {['RBI', 'NHB', 'PMLA', 'CKYC', 'SEBI'].map(name => (
+            <div key={name} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+               <div style={{ width: '45px', height: '45px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', display: 'grid', placeItems: 'center', fontSize: '20px' }}>🏛️</div>
+               <b style={{ fontSize: '18px', color: '#94a3b8' }}>{name}</b>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Feature Section */}
+      <div style={{ padding: '120px 80px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <h2 style={{ fontSize: '48px', fontWeight: '800' }}>Engineered for <span style={{ color: '#2563eb' }}>High-Impact</span> Banking</h2>
+        </div>
+        <div className="grid three" style={{ gap: '30px' }}>
+           {[
+             { title: 'Agentic AI Processing', desc: 'Auto-extract identity details from Aadhaar & PAN with 99.9% AI precision.', icon: '⚡' },
+             { title: 'Live Biometrics', desc: 'Real-time face matching and passive liveness checks to eliminate spoofing.', icon: '👤' },
+             { title: 'Enterprise Risk Scoring', desc: 'Sub-second background checks against global sanctions and high-risk lists.', icon: '🛡️' }
+           ].map((f, i) => (
+             <div key={i} style={{ padding: '50px', borderRadius: '32px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', transition: '0.3s' }} className="hover-scale">
+               <div style={{ fontSize: '42px', marginBottom: '30px' }}>{f.icon}</div>
+               <h3 style={{ fontSize: '22px', marginBottom: '20px' }}>{f.title}</h3>
+               <p style={{ color: '#94a3b8', lineHeight: '1.7', fontSize: '15px' }}>{f.desc}</p>
+             </div>
+           ))}
         </div>
       </div>
     </div>

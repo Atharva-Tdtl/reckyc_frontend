@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:8000/api' });
+const API = axios.create({ 
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api' 
+});
 
 API.interceptors.request.use(config => {
   const token = localStorage.getItem('kyc_token');
@@ -19,6 +21,8 @@ API.interceptors.response.use(
   }
 );
 
-export const AI = axios.create({ baseURL: 'http://localhost:8010' });
+export const AI = axios.create({ 
+  baseURL: import.meta.env.VITE_AI_URL || 'http://localhost:8010' 
+});
 
 export default API;
